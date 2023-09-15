@@ -1,9 +1,9 @@
 import json
-import sys
 from dataclasses import asdict
 from json.decoder import JSONDecodeError
 
 import click
+from loguru import logger
 
 from pyauthorizer.encryptor import interface
 from pyauthorizer.encryptor.base import Token, TokenStatus
@@ -108,7 +108,7 @@ def generate_license(flavor, config, output_path):
     """
     config_dict = convert_user_args_to_dict(config)
     encryptor = interface.get_encryptor(flavor)
-    token = encryptor.generate_token(config_dict)
+    token: Token = encryptor.generate_token(config_dict)
 
     json_license = json.dumps(
         asdict(token),
@@ -120,8 +120,9 @@ def generate_license(flavor, config, output_path):
     if output_path is not None:
         with open(output_path, "w") as f:
             f.write(json_license)
+        logger.info(f"Token written to {output_path}")
     else:
-        click.echo(json_license)
+        logger.info(json_license)
 
 
 @commands.command("validate")
@@ -135,28 +136,30 @@ def validate_license(flavor, config, input_path):
     config_dict = convert_user_args_to_dict(config)
     encryptor = interface.get_encryptor(flavor)
 
-    data = {}
     try:
+        data = {}
         with open(input_path) as f:
             data = json.load(f)
         token = Token(**data)
-    except (TypeError, FileNotFoundError, JSONDecodeError) as err:
+    except Exception as err:
         if isinstance(err, FileNotFoundError):
             err_msg = f"open authorized file: {err.args}"
         elif isinstance(err, JSONDecodeError):
             err_msg = f"invalid authorized file: {err.args}"
         else:
             err_msg = err.args
-        click.echo(f"Init Token failed with {err_msg}")
-        sys.exit(2)
+        logger.error(f"Init Token failed with {err_msg}")
+        raise SystemExit(1) from err
 
     status = encryptor.validate_token(token, config_dict)
     if status == TokenStatus.ACTIVE:
-        click.echo("Token is active")
+        logger.info("Token is active")
     elif status == TokenStatus.EXPIRED:
-        click.echo("Token has expired")
+        logger.error("Token has expired")
+        raise SystemExit(2)
     else:
-        click.echo("Token is invalid")
+        logger.error("Token is invalid")
+        raise SystemExit(3)
 
 
 if __name__ == "__main__":
