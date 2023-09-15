@@ -27,7 +27,7 @@ class PyAuthorizerError(Exception):
                 It will be included in the exception's serialized JSON representation.
                 This should be one of the codes listed in the `mlflow.protos.databricks_pb2` proto.
             kwargs: Additional key-value pairs to include in the serialized JSON representation
-                of the pyauthorizerException.
+                of the PyAuthorizerError.
         """
         try:
             self.error_code = error_code
@@ -50,15 +50,15 @@ class PyAuthorizerError(Exception):
 
     @classmethod
     def invalid_parameter_value(cls, message, **kwargs):
-        """Construct an `pyauthorizerException` object with the `INVALID_PARAMETER_VALUE` error code.
+        """Construct an `PyAuthorizerError` object with the `INVALID_PARAMETER_VALUE` error code.
 
         Args:
             message (str): The message describing the error that occurred.
                 This will be included in the exception's serialized JSON representation.
             kwargs: Additional key-value pairs to include in the serialized JSON representation
-                of the pyauthorizerException.
+                of the PyAuthorizerError.
 
         Returns:
-            pyauthorizerException: An instance of pyauthorizerException with the specified error code.
+            PyAuthorizerError: An instance of PyAuthorizerError with the specified error code.
         """
         return cls(message, error_code=ErrorName.INVALID_PARAMETER_VALUE, **kwargs)
