@@ -22,7 +22,7 @@ exclude: |
 repos:
   # Standard hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.4.0"
+    rev: "v4.5.0"
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -38,13 +38,13 @@ repos:
   # replace Flake8 (plus dozens of plugins), isort, pydocstyle, yesqa, eradicate,
   # pyupgrade, and autoflake
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.291
+    rev: v0.1.6
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
 
   # Black mirror, 2x faster black mirror
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.9.1
+    rev: 23.11.0
     hooks:
       - id: black
