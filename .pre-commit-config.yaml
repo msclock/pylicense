@@ -1,23 +1,6 @@
-# To use:
-#
-#     pre-commit run -a
-#
-# Or:
-#
-#     pre-commit install  # (runs every time you commit in git)
-#
-# To update this file:
-#
-#     pre-commit autoupdate
-#
-# See https://github.com/pre-commit/pre-commit
-#
-
-fail_fast: false
-exclude: |
-  (?x)(
-    ^(.gitlab-ci-local)
-  )
+ci:
+  autoupdate_commit_msg: "chore: update pre-commit hooks"
+  autofix_commit_msg: "style: pre-commit fixes"
 
 repos:
   # Standard hooks
@@ -26,13 +9,41 @@ repos:
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
-      - id: check-docstring-first
       - id: check-merge-conflict
+      - id: check-symlinks
       - id: debug-statements
       - id: end-of-file-fixer
       - id: mixed-line-ending
+      - id: name-tests-test
+        args: ["--pytest-test-first"]
       - id: requirements-txt-fixer
       - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: "v1.10.0"
+    hooks:
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.1.0"
+    hooks:
+      - id: prettier
+        types_or: [yaml, markdown, html, css, scss, javascript, json]
+        args: [--prose-wrap=always]
+
+  # Black mirror, 2x faster black mirror
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: "23.11.0"
+    hooks:
+      - id: black-jupyter
+
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: "1.16.0"
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==23.*]
 
   # Ruff, the Python auto-correcting linter written in Rust, Ruff can be used to
   # replace Flake8 (plus dozens of plugins), isort, pydocstyle, yesqa, eradicate,
@@ -43,8 +54,41 @@ repos:
       - id: ruff
         args: ["--fix", "--show-fixes"]
 
-  # Black mirror, 2x faster black mirror
-  - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.11.0
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v1.7.0"
     hooks:
-      - id: black
+      - id: mypy
+        files: src|tests
+        args: []
+        additional_dependencies:
+          - pytest
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: "v2.2.6"
+    hooks:
+      - id: codespell
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: "v0.9.0.6"
+    hooks:
+      - id: shellcheck
+
+  - repo: local
+    hooks:
+      - id: disallow-caps
+        name: Disallow improper capitalization
+        language: pygrep
+        entry: PyBind|Numpy|Cmake|CCache|Github|PyTest
+        exclude: .pre-commit-config.yaml
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.15
+    hooks:
+      - id: validate-pyproject
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.0
+    hooks:
+      - id: check-dependabot
+      - id: check-github-workflows
+      - id: check-readthedocs

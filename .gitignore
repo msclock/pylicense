@@ -341,3 +341,9 @@ ASALocalRun/
 .hypothesis
 dist
 *.egg-info/
+
+# python setuptool-scm version
+src/**/_version.py
+
+# docs
+docs/_build

@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2023.11.17
+_src_path: gh:scientific-python/cookie
+backend: setuptools621
+email: msclock@126.com
+full_name: msclock
+license: Apache
+org: msclock
+project_name: pyauthorizer
+project_short_description: A simple authorizer for python project.
+url: https://github.com/msclock/pyauthorizer
+vcs: true

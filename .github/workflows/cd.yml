@@ -1,0 +1,83 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: 3
+
+jobs:
+  dist:
+    name: Distribution build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: hynek/build-and-inspect-python-package@v1
+
+  publish-testpypi:
+    needs: [dist]
+    name: Publish to Test PyPI
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/${{ github.event.repository.name }}
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    if: github.branch == 'master'
+
+    steps:
+      - name: Download packages built by build-and-inspect-python-package
+        with:
+          name: Packages
+          path: dist
+        uses: actions/download-artifact@v3
+
+      - name: Upload package to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        env:
+          TEST_PYPI_API_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        if: github.branch == 'master' && env.TEST_PYPI_API_TOKEN != null
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  publish-pypi:
+    needs: [dist]
+    name: Publish to PyPI
+    environment:
+      name: pypi
+      url: https://pypi.org/p/${{ github.event.repository.name }}
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+
+    steps:
+      - name: Download packages built by build-and-inspect-python-package
+        with:
+          name: Packages
+          path: dist
+        uses: actions/download-artifact@v3
+
+      - name: Upload package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        if:
+          github.event_name == 'release' && github.event.action == 'published'
+          && env.PYPI_API_TOKEN  != null
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN  }}
