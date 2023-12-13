@@ -1,41 +1,68 @@
-import abc
+from __future__ import annotations
 
-import entrypoints
+import abc
+from typing import Any
+
+import entrypoints as ep
 
 from pyauthorizer.exceptions import ErrorName, PyAuthorizerError
 
 
 class PluginManager(abc.ABC):
-    """Base class for managing plugins"""
+    """Base class for managing plugins
 
-    def __init__(self, group_name) -> None:
-        """Initialize the PluginManager"""
-        self._registry = {}
+
+    Parameters:
+        group_name (str): The name of the plugin group.
+    """
+
+    def __init__(self, group_name: str) -> None:
+        """
+        Initialize the PluginManager.
+        """
+        self._registry: dict[str, ep.EntryPoint] = {}
         self.group_name = group_name
-        self._has_registered = None
+        self._has_registered = False
 
     @abc.abstractmethod
-    def __getitem__(self, item):
-        """Get a plugin from the registry"""
+    def __getitem__(self, item: str) -> Any:
+        """Get a plugin from the registry.
+
+        Args:
+            item (str): The name of the plugin to get.
+
+        Returns:
+            Any: The plugin object.
+        """
 
     @property
-    def registry(self):
+    def registry(self) -> dict[str, ep.EntryPoint]:
         """Get the plugin registry"""
         return self._registry
 
     @property
-    def has_registered(self):
+    def has_registered(self) -> bool:
         """Check if plugins have been registered"""
         return self._has_registered
 
-    def register(self, flavor_name, plugin_module):
-        """Register a plugin"""
-        self._registry[flavor_name] = entrypoints.EntryPoint(flavor_name, plugin_module, None)
+    def register(self, flavor_name: str, plugin_module: str) -> None:
+        """
+        Register a plugin.
+
+        Args:
+            flavor_name (str): The name of the flavor.
+            plugin_module (str): The name of the plugin module.
+
+        Returns:
+            None
+        """
+        entry_point = ep.EntryPoint(flavor_name, plugin_module, None)
+        self._registry[flavor_name] = entry_point
         self._has_registered = True
 
-    def register_entrypoints(self):
+    def register_entrypoints(self) -> None:
         """Register plugins using entrypoints"""
-        for entrypoint in entrypoints.get_group_all(self.group_name):
+        for entrypoint in ep.get_group_all(self.group_name):
             self._registry[entrypoint.name] = entrypoint
 
         self._has_registered = True
@@ -49,7 +76,7 @@ class EncryptorPlugins(PluginManager):
         super().__init__("pyauthorizer.encryptor")
         self.register_entrypoints()
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: str) -> Any:
         """Get a plugin from the registry"""
         try:
             flavor_name = item
@@ -61,9 +88,11 @@ class EncryptorPlugins(PluginManager):
                 "plugin from https://github.com/msclock/pyauthorizer/tree/master/pyauthorizer/encrpytor/builtin "
                 "or implement your plugins."
             )
-            raise PyAuthorizerError(msg, error_code=ErrorName.RESOURCE_DOES_NOT_EXIST) from err
+            raise PyAuthorizerError(
+                msg, error_code=ErrorName.resource_does_not_exist
+            ) from err
 
-        if isinstance(plugin_like, entrypoints.EntryPoint):
+        if isinstance(plugin_like, ep.EntryPoint):
             try:
                 plugin_obj = plugin_like.load()
             except (AttributeError, ImportError) as exc:

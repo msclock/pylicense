@@ -2,18 +2,19 @@ from __future__ import annotations
 
 import base64
 import json
+from typing import Any
 
-from cryptography.fernet import Fernet, InvalidSignature, InvalidToken, MultiFernet
+from cryptography.fernet import Fernet, MultiFernet
 
 from pyauthorizer.encryptor.base import BaseEncryptor, Token
-from pyauthorizer.encryptor.utils import generate_key
+from pyauthorizer.encryptor.utils import decrypt_with_cipher, generate_key
 
 
 class MultiEncryptor(BaseEncryptor):
-    def __init__(self):
-        super().__init__()
+    def __init__(self) -> None:
+        pass
 
-    def encrypt(self, data: dict) -> tuple[str, str]:
+    def encrypt(self, data: dict[str, Any]) -> tuple[str, str]:
         """
         Encrypts the given data using a set of secret keys.
 
@@ -31,7 +32,7 @@ class MultiEncryptor(BaseEncryptor):
         secret_key = " ".join([k.decode("utf-8") for k in secret_keys])
         return secret_key, token.decode("utf-8")
 
-    def decrypt(self, token: Token) -> dict:
+    def decrypt(self, token: Token) -> dict[str, Any]:
         """
         Decrypts a token and returns the token data as a dictionary.
 
@@ -40,18 +41,7 @@ class MultiEncryptor(BaseEncryptor):
 
         Returns:
             dict: The decrypted token data.
-
-        Raises:
-            InvalidToken: If the token is invalid or cannot be decrypted.
-            InvalidSignature: If the token has an invalid signature.
         """
-        token_data = {}
-        try:
-            cipher = MultiFernet([Fernet(k) for k in token.secret_key.split()])
-            decrypted_token = cipher.decrypt(token.token.encode("utf-8"))
-            decoded_data = base64.urlsafe_b64decode(decrypted_token)
-            token_data: dict = json.loads(decoded_data)
-        except (InvalidToken, InvalidSignature):
-            pass
 
-        return token_data
+        cipher = MultiFernet([Fernet(k) for k in token.secret_key.split()])
+        return decrypt_with_cipher(token, cipher)

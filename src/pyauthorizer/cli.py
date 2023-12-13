@@ -1,15 +1,20 @@
+from __future__ import annotations
+
 import json
 from dataclasses import asdict
 from json.decoder import JSONDecodeError
+from pathlib import Path
 
 import click
+from click import option
 from loguru import logger
 
 from pyauthorizer.encryptor import interface
 from pyauthorizer.encryptor.base import Token, TokenStatus
+from pyauthorizer.exceptions import ErrorName, PyAuthorizerError
 
 
-def convert_user_args_to_dict(user_list):
+def convert_user_args_to_dict(user_list: list[str]) -> dict[str, str]:
     """
     Converts a list of user arguments to a dictionary.
 
@@ -20,8 +25,7 @@ def convert_user_args_to_dict(user_list):
         dict: A dictionary containing the converted user arguments. The keys are the names extracted from the user arguments, and the values are the corresponding values.
 
     Raises:
-        click.BadOptionUsage: If the user arguments are not in the correct format.
-        click.ClickException: If a parameter is repeated in the user arguments.
+        PyAuthorizerError: If the user arguments are not in the correct format or if a parameter is repeated.
     """
     user_dict = {}
     for s in user_list:
@@ -30,16 +34,18 @@ def convert_user_args_to_dict(user_list):
             name, value = s.split("=", 1)
         except ValueError as exc:
             # not enough values to unpack
-            msg = "config"
-            raise click.BadOptionUsage(
-                msg,
+            msg = (
                 "Config options must be a pair and should be "
                 "provided as ``-C key=value`` or "
-                "``--config key=value``",
+                "``--config key=value``"
+            )
+            raise PyAuthorizerError(
+                msg,
+                error_code=ErrorName.invalid_parameter_value,
             ) from exc
         if name in user_dict:
             msg = f"Repeated parameter: '{name}'"
-            raise click.ClickException(msg)
+            raise PyAuthorizerError(msg, error_code=ErrorName.invalid_parameter_value)
         user_dict[name] = value
     return user_dict
 
@@ -47,21 +53,25 @@ def convert_user_args_to_dict(user_list):
 # load all registered encryptors
 installed_flavors = list(interface.encryptor_plugins.registry)
 if len(installed_flavors) > 0:
-    supported_flavors_msg = "Support is currently installed for encryptor to: {flavors}".format(
-        flavors=", ".join(installed_flavors)
-    )
+    SUPPORTED_FLAVORS_MSG = f"""Support is currently installed for encryptor to: {", ".join(installed_flavors)}"""
 else:
-    supported_flavors_msg = "NOTE: you currently do not have support installed for any encryptor flavors."
+    SUPPORTED_FLAVORS_MSG = (
+        "NOTE: you currently do not have support installed for any encryptor flavors."
+    )
 
+
+# mypy: disallow-untyped-decorators=False
 
 # cmd options
-parse_output = click.option(
+parse_output = option(
     "--output-path",
     "-O",
     help="File to output results to as a JSON file. If not provided, prints output to stdout.",
 )
-parse_input = click.option("--input-path", "-I", required=True, help="Path to input json file for prediction")
-parse_custom_arguments = click.option(
+parse_input = option(
+    "--input-path", "-I", required=True, help="Path to input json file for prediction"
+)
+parse_custom_arguments = option(
     "--config",
     "-C",
     metavar="NAME=VALUE",
@@ -71,7 +81,7 @@ parse_custom_arguments = click.option(
     "documentation/help for your encryptor target for a "
     "list of supported config options.",
 )
-encryptor_flavor = click.option(
+encryptor_flavor = option(
     "--flavor",
     "-f",
     required=True,
@@ -79,12 +89,12 @@ encryptor_flavor = click.option(
 )
 
 
-@click.group(
+commands = click.Group(
     "encrpytor",
     help=f"""
     Using encrpytor to manage tokens.Run `pyauthorizer --help` for
     more details on the supported URI format and config options for a given target.
-    {supported_flavors_msg}
+    {SUPPORTED_FLAVORS_MSG}
 
     See all supported encryption targets and installation instructions in
     https://github.com/msclock/pyauthorizer/tree/master/pyauthorizer/encrpytor/builtin
@@ -92,22 +102,22 @@ encryptor_flavor = click.option(
     You can also write your own plugin for encryptor to a custom target. For instructions on
     writing and distributing a plugin, related docs are coming soon.""",
 )
-def commands():
-    """
-    Provide commands to manage tokens for py project.
-    """
 
 
 @commands.command("create")
 @parse_output
 @parse_custom_arguments
 @encryptor_flavor
-def generate_license(flavor, config, output_path):
+def generate_license(flavor: str, config: list[str], output_path: str) -> None:
     """
     Generate a token using the given flavor and configuration, and either write it to a file or print it to the console.
     """
     config_dict = convert_user_args_to_dict(config)
     encryptor = interface.get_encryptor(flavor)
+    if encryptor is None:
+        logger.error(f"Unsupported encryptor: {flavor}")
+        return
+
     token: Token = encryptor.generate_token(config_dict)
 
     json_license = json.dumps(
@@ -117,8 +127,8 @@ def generate_license(flavor, config, output_path):
         sort_keys=False,
         separators=(",", ":"),
     )
-    if output_path is not None:
-        with open(output_path, "w") as f:
+    if len(output_path) != 0:
+        with Path(output_path).open("w", encoding="utf-8") as f:
             f.write(json_license)
         logger.info(f"Token written to {output_path}")
     else:
@@ -129,16 +139,15 @@ def generate_license(flavor, config, output_path):
 @parse_input
 @parse_custom_arguments
 @encryptor_flavor
-def validate_license(flavor, config, input_path):
+def validate_license(flavor: str, config: list[str], input_path: str) -> None:
     """
     Validates a token using the specified flavor.
     """
     config_dict = convert_user_args_to_dict(config)
-    encryptor = interface.get_encryptor(flavor)
 
     try:
         data = {}
-        with open(input_path) as f:
+        with Path(input_path).open(encoding="utf-8") as f:
             data = json.load(f)
         token = Token(**data)
     except Exception as err:
@@ -147,9 +156,14 @@ def validate_license(flavor, config, input_path):
         elif isinstance(err, JSONDecodeError):
             err_msg = f"invalid authorized file: {err.args}"
         else:
-            err_msg = err.args
+            err_msg = str(err.args)
         logger.error(f"Init Token failed with {err_msg}")
         raise SystemExit(1) from err
+
+    encryptor = interface.get_encryptor(flavor)
+    if encryptor is None:
+        logger.error(f"Target {flavor} is not supported")
+        raise SystemExit(1)
 
     status = encryptor.validate_token(token, config_dict)
     if status == TokenStatus.ACTIVE:

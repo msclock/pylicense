@@ -1,8 +1,14 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools_scm[toml]>=7"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pyauthorizer"
-readme = "README.md"
-description = "A simple authorizer for python projects"
+authors = [{ name = "msclock", email = "msclock@126.com" }]
+description = "A simple authorizer for python project."
 dynamic = ["version"]
+readme = "README.md"
+requires-python = ">=3.8"
 classifiers = [
     "Development Status :: 4 - Beta",
     "License :: OSI Approved :: Apache Software License",
@@ -10,7 +16,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -19,83 +25,138 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Education",
     "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
 ]
-authors = []
-maintainers = []
 keywords = ["license", "license-generator"]
 license = { text = "Apache 2.0" }
-requires-python = ">=3.7"
-dependencies = ["click", "cryptography>=41.0.0"]
-
-[project.urls]
-"Documentation" = "https://github.com/msclock/pyauthorizer.git"
-"Source" = "https://github.com/msclock/pyauthorizer.git"
-"Tracker" = "https://github.com/msclock/pyauthorizer/issues"
+dependencies = [
+    "loguru",
+    "click",
+    "types-click",
+    "cryptography>=41.0.0",
+    "entrypoints",
+]
 
 [project.optional-dependencies]
-test = ["pytest >= 5.2", "pytest-mock >= 3.8.2"]
-dev = ["black >= 22.8", "build >= 0.8", "pip >= 21.1", "twine >= 4.0"]
+test = ["pytest >=6", "pytest-cov >=3"]
+docs = [
+    "sphinx>=7.0",
+    "myst_parser>=0.13",
+    "sphinx_copybutton",
+    "sphinx_autodoc_typehints",
+    "furo>=2023.08.17",
+]
+dev = ["pyauthorizer[test,docs]", "build", "wheel"]
+
+[project.urls]
+Homepage = "https://github.com/msclock/pyauthorizer"
+Tracker = "https://github.com/msclock/pyauthorizer/issues"
+Documentation = "https://github.com/msclock/pyauthorizer.git"
+Source = "https://github.com/msclock/pyauthorizer.git"
+Changelog = "https://github.com/msclock/pyauthorizer/releases"
 
 [project.scripts]
 pyauthorizer = "pyauthorizer.cli:commands"
 
-[build-system]
-requires = ["setuptools", "setuptools-scm", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [tool.setuptools]
 include-package-data = true
 
-[tool.setuptools.packages.find]
-namespaces = false
-
-[tool.setuptools.package-data]
-pyauthorizer = ["**/*"]
-
 [tool.setuptools_scm]
-write_to = "pyauthorizer/_version.py"
+write_to = "src/pyauthorizer/_version.py"
 
 [tool.check-sdist]
-sdist-only = ["pyauthorizer/_version.py"]
+sdist-only = ["src/pyauthorizer/_version.py"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
+filterwarnings = ["error"]
+log_cli_level = "INFO"
+testpaths = ["tests"]
+
+[tool.coverage]
+run.source = ["pyauthorizer"]
+port.exclude_lines = ['pragma: no cover', '\.\.\.', 'if typing.TYPE_CHECKING:']
+
+[tool.mypy]
+files = ["src", "tests"]
+python_version = "3.8"
+warn_unused_configs = true
+strict = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[[tool.mypy.overrides]]
+module = "pyauthorizer.*"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = ["cryptography.*", "click.*", "loguru", "entrypoints"]
+ignore_missing_imports = true
 
 [tool.ruff]
-select = [
-    "E",
-    "F",
-    "W",      # flake8
+src = ["src"]
+
+[tool.ruff.lint]
+extend-select = [
     "B",      # flake8-bugbear
     "I",      # isort
-    "N",      # pep8-naming
     "ARG",    # flake8-unused-arguments
     "C4",     # flake8-comprehensions
     "EM",     # flake8-errmsg
     "ICN",    # flake8-import-conventions
-    "ISC",    # flake8-implicit-str-concat
+    "G",      # flake8-logging-format
     "PGH",    # pygrep-hooks
     "PIE",    # flake8-pie
     "PL",     # pylint
     "PT",     # flake8-pytest-style
+    "PTH",    # flake8-use-pathlib
     "RET",    # flake8-return
-    "RUF100", # Ruff-specific
+    "RUF",    # Ruff-specific
     "SIM",    # flake8-simplify
+    "T20",    # flake8-print
     "UP",     # pyupgrade
     "YTT",    # flake8-2020
+    "EXE",    # flake8-executable
+    "NPY",    # NumPy specific rules
+    "PD",     # pandas-vet
+    "PTH123", # `open()` should be replaced by `Path.open()`
 ]
 ignore = [
-    "PLR",     # Design related pylint
-    "E501",    # Line too long (Black is enough)
-    "PT011",   # Too broad with raises in pytest
-    "PT004",   # Fixture that doesn't return needs underscore (no, it is fine)
-    "SIM118",  # iter(x) is not always the same as iter(x.keys())
-    "ARG001",  # Ignore unused arguments
-    "PLW0603", # We're fine with global vars
+    "PLR", # Design related pylint codes
 ]
-target-version = "py37"
-src = ["pyauthorizer"]
-unfixable = ["T20"]
-exclude = []
-line-length = 120
+isort.required-imports = ["from __future__ import annotations"]
+# Uncomment if using a _compat.typing backport
+# typing-modules = ["pyauthorizer._compat.typing"]
 
-[tool.black]
-line-length = 120
-target-version = ['py37', 'py38', 'py39', 'py310']
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["T20"]
+"noxfile.py" = ["T20"]
+
+[tool.pylint]
+py-version = "3.8"
+ignore-paths = [".*/_version.py"]
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
+jobs = "0"
+good-names = ["f"]
+messages_control.disable = [
+    "design",
+    "fixme",
+    "import-outside-toplevel",
+    "invalid-name",
+    "line-too-long",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "wrong-import-position",
+    "unnecessary-ellipsis",  # Conflicts with Protocols
+    "broad-except",
+    "unused-argument",  # Handled by Ruff
+    "redefined-builtin",  # ExceptionGroup is a builtin
+]

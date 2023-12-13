@@ -5,6 +5,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
+from typing import Any
 
 
 class TokenStatus(Enum):
@@ -13,14 +14,22 @@ class TokenStatus(Enum):
     """
 
     ACTIVE = 1
+    """Token is valid and active."""
     EXPIRED = 2
+    """Token is valid but has expired."""
     INVALID = 3
+    """Token is invalid."""
 
 
 @dataclass
 class Token:
     """
     Class representing a token.
+
+    Parameters:
+        secret_key (str): The secret key associated with the token.
+        token (str): The token value.
+        expiry (str): The expiry date of the token.
     """
 
     secret_key: str
@@ -34,18 +43,18 @@ class BaseEncryptor(abc.ABC):
     """
 
     @abc.abstractmethod
-    def encrypt(self, token_data: dict) -> tuple[str, str]:
+    def encrypt(self, data: dict[str, Any]) -> tuple[str, str]:
         """
         Encrypts the provided data.
 
         Args:
-            token_data (dict): The data to be encrypted.
+            data (dict): The data to be encrypted.
 
         Returns:
             Tuple[str, str]: A tuple containing the secret key and the encrypted token.
         """
 
-    def generate_token(self, data: dict) -> Token:
+    def generate_token(self, data: dict[str, Any]) -> Token:
         """
         Generates a token based on the provided data.
 
@@ -54,9 +63,6 @@ class BaseEncryptor(abc.ABC):
 
         Returns:
             Token: The generated token.
-
-        Raises:
-            None
         """
         token_data = deepcopy(data)
         expiry = token_data.pop("expiry", "")
@@ -68,7 +74,7 @@ class BaseEncryptor(abc.ABC):
         )
 
     @abc.abstractmethod
-    def decrypt(self, token: Token) -> dict:
+    def decrypt(self, token: Token) -> dict[str, Any]:
         """
         Decrypts the provided token.
 
@@ -79,7 +85,7 @@ class BaseEncryptor(abc.ABC):
             dict: A dictionary containing the decrypted data.
         """
 
-    def validate_token(self, token: Token, data: dict) -> TokenStatus:
+    def validate_token(self, token: Token, data: dict[str, Any]) -> TokenStatus:
         """
         Validates a token by comparing its decrypted data with the provided data dictionary.
 
