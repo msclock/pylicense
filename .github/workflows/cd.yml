@@ -39,7 +39,7 @@ jobs:
     permissions:
       id-token: write
     runs-on: ubuntu-latest
-    if: github.branch == 'master'
+    if: ${{ github.ref_name == github.event.repository.default_branch }}
 
     steps:
       - name: Download packages built by build-and-inspect-python-package
