@@ -41,6 +41,7 @@ nitpick_ignore = [
     ("py:class", "_io.StringIO"),
     ("py:class", "_io.BytesIO"),
     ("py:class", "entrypoints.EntryPoint"),
+    ("py:class", "Fernet"),
 ]
 
 always_document_param_types = True

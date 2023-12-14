@@ -1,0 +1,39 @@
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency:
+  group: preview-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages-preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: wntrblm/nox@2023.04.22
+        with:
+          python-versions: "3.11"
+
+      - name: Verify no changes required to API docs
+        run: |
+          nox -s build_api_docs
+          git diff --exit-code
+
+      - name: Generate docs
+        run: nox -s docs
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./docs/_build/html
