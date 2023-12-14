@@ -32,7 +32,6 @@ license = { text = "Apache 2.0" }
 dependencies = [
     "loguru",
     "click",
-    "types-click",
     "cryptography>=41.0.0",
     "entrypoints",
 ]
