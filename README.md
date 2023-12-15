@@ -16,6 +16,12 @@
 
 A simple authorizer for python project.
 
+Sometimes,even for a scripting language like python to generate and validate a
+token is needed for some specific use cases. It provides a simple way to
+generate and validate license. And encrytors and decrytors can be easily
+customized by the built-in plugins. Certainly, simple cmdline tool is also
+available.
+
 ## Install
 
 Package-built has uploaded to pypi and just install with the command:
