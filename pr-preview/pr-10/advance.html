@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="Getting Started" href="getting_started.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Advance - pyauthorizer 0.2.2.dev10+gd9525ff documentation</title>
+        <title>Advance - pyauthorizer 0.2.2.dev11+g7f52304 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">pyauthorizer 0.2.2.dev10+gd9525ff documentation</div></a>
+      <a href="index.html"><div class="brand">pyauthorizer 0.2.2.dev11+g7f52304 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev10+gd9525ff documentation</span>
+  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev11+g7f52304 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -207,8 +207,32 @@
         <article role="main">
           <section id="advance">
 <h1>Advance<a class="headerlink" href="#advance" title="Link to this heading">#</a></h1>
-<section id="customize">
-<h2>Customize<a class="headerlink" href="#customize" title="Link to this heading">#</a></h2>
+<p>The page is prepared for advanced users. Normally, the built-in plugins are not
+enough because security is a concern that encrypt/decrypt operation should be
+protected from an exploitation attacker. Here, we will show how to customize the
+plugins and work as ports in nuitka to provide more secure operation.</p>
+<section id="encrypt-decrypt-customize">
+<h2>Encrypt/Decrypt Customize<a class="headerlink" href="#encrypt-decrypt-customize" title="Link to this heading">#</a></h2>
+<p>Thanks to the plugin manager, encryption and decryption operations can be
+customized.</p>
+<p>The plugin is powered by <code class="docutils literal notranslate"><span class="pre">entrypoints</span></code> module.</p>
+<section id="write-your-own-plugin">
+<h3>Write your own plugin<a class="headerlink" href="#write-your-own-plugin" title="Link to this heading">#</a></h3>
+<p>You define a new plugin as a standalone Python package that can be distributed
+for installation via PyPI or conda.</p>
+<p>See
+https://github.com/msclock/pyauthorizer/tree/master/src/pyauthorizer/encryptor/builtin
+for built-in plugins. You can also write your own plugin as a standalone package
+that implements all available plugin types.</p>
+<p>What you need to do is to subclass <code class="docutils literal notranslate"><span class="pre">BaseEncryptor</span></code> and implement the <code class="docutils literal notranslate"><span class="pre">encrypt</span></code>
+and <code class="docutils literal notranslate"><span class="pre">decrypt</span></code> methods. Then register the plugin through declaring it in the
+package configuration with the entrypoint. Such as:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="c1"># in pyproject.toml</span>
+<span class="k">[project.entry-points.</span><span class="s2">&quot;pyauthorizer.encryptor&quot;</span><span class="k">]</span>
+<span class="n">subclass_encryptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;custom_plugins.subclass_encryptor&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="work-as-ports-in-nuitka">
 <h2>Work as ports in nuitka<a class="headerlink" href="#work-as-ports-in-nuitka" title="Link to this heading">#</a></h2>
@@ -271,7 +295,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Advance</a><ul>
-<li><a class="reference internal" href="#customize">Customize</a></li>
+<li><a class="reference internal" href="#encrypt-decrypt-customize">Encrypt/Decrypt Customize</a><ul>
+<li><a class="reference internal" href="#write-your-own-plugin">Write your own plugin</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#work-as-ports-in-nuitka">Work as ports in nuitka</a></li>
 </ul>
 </li>
@@ -284,7 +311,7 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=90243730"></script>
+</div><script src="_static/documentation_options.js?v=2cbe0dbd"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>

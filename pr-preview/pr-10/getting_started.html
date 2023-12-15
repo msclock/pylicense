@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Advance" href="advance.html" /><link rel="prev" title="pyauthorizer" href="index.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Getting Started - pyauthorizer 0.2.2.dev10+gd9525ff documentation</title>
+        <title>Getting Started - pyauthorizer 0.2.2.dev11+g7f52304 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -124,7 +124,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">pyauthorizer 0.2.2.dev10+gd9525ff documentation</div></a>
+      <a href="index.html"><div class="brand">pyauthorizer 0.2.2.dev11+g7f52304 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -147,7 +147,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev10+gd9525ff documentation</span>
+  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev11+g7f52304 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -199,7 +199,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -207,6 +207,39 @@
         <article role="main">
           <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyauthorizer</span></code> package can be installed with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyauthorizer
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<p>Available commands are:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>pyauthorizer<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+
+<span class="w">  </span>Using<span class="w"> </span>encrpytor<span class="w"> </span>to<span class="w"> </span>manage<span class="w"> </span>tokens.Run<span class="w"> </span><span class="sb">`</span>pyauthorizer<span class="w"> </span>--help<span class="sb">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>details
+<span class="w">  </span>on<span class="w"> </span>the<span class="w"> </span>supported<span class="w"> </span>URI<span class="w"> </span>format<span class="w"> </span>and<span class="w"> </span>config<span class="w"> </span>options<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>given<span class="w"> </span>target.<span class="w"> </span>Support
+<span class="w">  </span>is<span class="w"> </span>currently<span class="w"> </span>installed<span class="w"> </span><span class="k">for</span><span class="w"> </span>encryptor<span class="w"> </span>to:<span class="w"> </span>multiple,<span class="w"> </span>simple
+
+<span class="w">  </span>See<span class="w"> </span>all<span class="w"> </span>supported<span class="w"> </span>encryption<span class="w"> </span>targets<span class="w"> </span>and<span class="w"> </span>installation<span class="w"> </span>instructions<span class="w"> </span><span class="k">in</span><span class="w"> </span>https:
+<span class="w">  </span>//github.com/msclock/pyauthorizer/tree/master/pyauthorizer/encrpytor/builtin
+
+<span class="w">  </span>You<span class="w"> </span>can<span class="w"> </span>also<span class="w"> </span>write<span class="w"> </span>your<span class="w"> </span>own<span class="w"> </span>plugin<span class="w"> </span><span class="k">for</span><span class="w"> </span>encryptor<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>custom<span class="w"> </span>target.<span class="w"> </span>For
+<span class="w">  </span>instructions<span class="w"> </span>on<span class="w"> </span>writing<span class="w"> </span>and<span class="w"> </span>distributing<span class="w"> </span>a<span class="w"> </span>plugin,<span class="w"> </span>related<span class="w"> </span>docs<span class="w"> </span>are<span class="w"> </span>coming
+<span class="w">  </span>soon.
+
+Options:
+<span class="w">  </span>--help<span class="w">  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+
+Commands:
+<span class="w">  </span>create<span class="w">    </span>Generate<span class="w"> </span>a<span class="w"> </span>token<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>flavor<span class="w"> </span>and<span class="w"> </span>configuration,...
+<span class="w">  </span>validate<span class="w">  </span>Validates<span class="w"> </span>a<span class="w"> </span>token<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>specified<span class="w"> </span>flavor.
+</pre></div>
+</div>
+<p>For more information, run <code class="docutils literal notranslate"><span class="pre">pyauthorizer</span> <span class="pre">--help</span></code></p>
+</section>
 </section>
 
         </article>
@@ -252,13 +285,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=90243730"></script>
+</div><script src="_static/documentation_options.js?v=2cbe0dbd"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
