@@ -13,7 +13,7 @@ module.exports = {
           { type: "refactor", release: "patch" },
           { type: "perf", release: "patch" },
           { type: "revert", release: "patch" },
-          { type: "chore", scope: "port*", release: "patch" },
+          { type: "chore", scope: "deps", release: "patch" },
           { type: "build", release: false },
           { type: "ci", release: false },
           { type: "docs", release: false },
