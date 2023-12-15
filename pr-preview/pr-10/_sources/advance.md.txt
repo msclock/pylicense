@@ -35,7 +35,6 @@ subclass_encryptor = "custom_plugins.subclass_encryptor"
 ````
 
 ````{tab} setup.py
-
 ```python
 setup(
     name="custom-plugins",
