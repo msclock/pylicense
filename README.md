@@ -26,8 +26,6 @@ pip install pyauthorizer
 
 ## Usage
 
-### Generate and validate a license
-
 To generate and validate a license, use the command:
 
 ```bash
