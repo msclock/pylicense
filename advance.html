@@ -2,10 +2,12 @@
 <html class="no-js" lang="en" data-content_root="./">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="Getting Started" href="getting_started.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 --><title>Python Module Index - pyauthorizer 0.2.2.dev11+g1fe3b38 documentation</title>
-<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Advance - pyauthorizer 0.2.2.dev11+g1fe3b38 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
@@ -134,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -155,10 +157,10 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advance.html">Advance</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Advance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API docs</span></p>
@@ -189,7 +191,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -197,100 +200,98 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<section class="domainindex-section">
-  <h1>Python Module Index</h1>
-  <div class="domainindex-jumpbox"><a href="#cap-p"><strong>p</strong></a></div>
+          <section id="advance">
+<h1>Advance<a class="headerlink" href="#advance" title="Link to this heading">#</a></h1>
+<p>The page is prepared for advanced users. Normally, the built-in plugins are not
+enough because security is a concern that encrypt/decrypt operation should be
+protected from an exploitation attacker. Here, we will show how to customize the
+plugins and work as ports in nuitka to provide more secure operation.</p>
+<section id="encrypt-decrypt-customize">
+<h2>Encrypt/Decrypt Customize<a class="headerlink" href="#encrypt-decrypt-customize" title="Link to this heading">#</a></h2>
+<p>Thanks to the plugin manager, encryption and decryption operations can be
+customized.</p>
+<p>The plugin implementation is powered by <code class="docutils literal notranslate"><span class="pre">entrypoints</span></code> module.</p>
+<section id="write-your-own-plugin">
+<h3>Write your own plugin<a class="headerlink" href="#write-your-own-plugin" title="Link to this heading">#</a></h3>
+<p>You can define a new plugin as a standalone Python package that can be
+distributed for installation via PyPI or conda.</p>
+<p>See
+<a class="reference external" href="https://github.com/msclock/pyauthorizer/tree/master/src/pyauthorizer/encryptor/builtin">https://github.com/msclock/pyauthorizer/tree/master/src/pyauthorizer/encryptor/builtin</a>
+for built-in plugins. You can also write your own plugin as a standalone package
+that implements all available plugin types.</p>
+<p>What you need to do is to subclass <code class="docutils literal notranslate"><span class="pre">BaseEncryptor</span></code> and implement the <code class="docutils literal notranslate"><span class="pre">encrypt</span></code>
+and <code class="docutils literal notranslate"><span class="pre">decrypt</span></code> methods. Then register the plugin through declaring it in the
+package configuration with the entrypoint. Such as:</p>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">pyproject.toml</label><div class="tab-content docutils">
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="c1"># in pyproject.toml</span>
+<span class="k">[project.entry-points.</span><span class="s2">&quot;pyauthorizer.encryptor&quot;</span><span class="k">]</span>
+<span class="n">subclass_encryptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;custom_plugins.subclass_encryptor&quot;</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">setup.py</label><div class="tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;custom-plugins&quot;</span><span class="p">,</span>
+    <span class="c1"># Require pyauthorizer as a dependency of the plugin, so that plugin users can simply install</span>
+    <span class="c1"># the plugin and then immediately use it with pyauthorizer</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pyauthorizer&quot;</span><span class="p">],</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="c1"># Define a puauthorizer encryptor plugin for target &#39;subclass_encryptor&#39;</span>
+        <span class="s2">&quot;pyauthorizer.encryptor&quot;</span><span class="p">:</span> <span class="s2">&quot;subclass_encryptor=custom_plugins.subclass_encryptor&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assuming you’ve structured your plugin similarly to the example plugin, you can
+distribute it via PyPI.</p>
+<p>Congrats, you’ve now written and distributed your own pyauthorizer plugin!</p>
 </section>
-<table class="domainindex-table">
-  <tr class="pcap">
-    <td></td><td>&#160;</td><td></td>
-  </tr>
-  <tr class="cap" id="cap-p">
-    <td></td><td><strong>p</strong></td><td></td>
-  </tr>
-  <tr>
-    <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-    <td>
-        <a href="api/pyauthorizer.html#module-pyauthorizer"><code class="xref">pyauthorizer</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.html#module-pyauthorizer.cli"><code class="xref">pyauthorizer.cli</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.html#module-pyauthorizer.encryptor"><code class="xref">pyauthorizer.encryptor</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.html#module-pyauthorizer.encryptor.base"><code class="xref">pyauthorizer.encryptor.base</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.builtin.html#module-pyauthorizer.encryptor.builtin"><code class="xref">pyauthorizer.encryptor.builtin</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.builtin.html#module-pyauthorizer.encryptor.builtin.multiple"><code class="xref">pyauthorizer.encryptor.builtin.multiple</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.builtin.html#module-pyauthorizer.encryptor.builtin.simple"><code class="xref">pyauthorizer.encryptor.builtin.simple</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.html#module-pyauthorizer.encryptor.interface"><code class="xref">pyauthorizer.encryptor.interface</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.html#module-pyauthorizer.encryptor.plugin_manager"><code class="xref">pyauthorizer.encryptor.plugin_manager</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.encryptor.html#module-pyauthorizer.encryptor.utils"><code class="xref">pyauthorizer.encryptor.utils</code></a></td><td>
-    <em></em></td>
-  </tr>
-  <tr class="cg-1">
-    <td></td>
-    <td>&#160;&#160;&#160;
-        <a href="api/pyauthorizer.html#module-pyauthorizer.exceptions"><code class="xref">pyauthorizer.exceptions</code></a></td><td>
-    <em></em></td>
-  </tr>
-</table>
+</section>
+<section id="work-as-ports-in-nuitka">
+<h2>Work as ports in nuitka<a class="headerlink" href="#work-as-ports-in-nuitka" title="Link to this heading">#</a></h2>
+<p>For secure reasons, sources sometimes need to be converted to executables or
+shared modules that prevents them from being tampered with or leaked. This can
+be done with nuitka.</p>
+<p>More detailed information can be found in
+<a class="reference external" href="https://msclock.gitlab.io/pytools/docs/nuitka.html">https://msclock.gitlab.io/pytools/docs/nuitka.html</a>.</p>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="changelog.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Changelog</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="getting_started.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Getting Started</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -309,8 +310,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Advance</a><ul>
+<li><a class="reference internal" href="#encrypt-decrypt-customize">Encrypt/Decrypt Customize</a><ul>
+<li><a class="reference internal" href="#write-your-own-plugin">Write your own plugin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#work-as-ports-in-nuitka">Work as ports in nuitka</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -3,13 +3,14 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="pyauthorizer package" href="api/pyauthorizer.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Getting Started" href="getting_started.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>pyauthorizer 0.2.2.dev7+g0cd1a32 documentation</title>
+        <title>pyauthorizer 0.2.2.dev11+g1fe3b38 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
     
     
@@ -124,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">pyauthorizer 0.2.2.dev7+g0cd1a32 documentation</div></a>
+      <a href="#"><div class="brand">pyauthorizer 0.2.2.dev11+g1fe3b38 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -147,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   
-  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev7+g0cd1a32 documentation</span>
+  <span class="sidebar-brand-text">pyauthorizer 0.2.2.dev11+g1fe3b38 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -155,7 +156,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">API docs</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advance.html">Advance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API docs</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api/pyauthorizer.html">pyauthorizer package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of pyauthorizer package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="api/pyauthorizer.encryptor.html">pyauthorizer.encryptor package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of pyauthorizer.encryptor package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -200,11 +208,14 @@
         <article role="main">
           <section id="pyauthorizer">
 <h1>pyauthorizer<a class="headerlink" href="#pyauthorizer" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-</div>
 <!-- prettier-ignore-start -->
 <!-- prettier-ignore-end -->
 <p>A simple authorizer for python project.</p>
+<p>Sometimes,even for a scripting language like python to generate and validate a
+token is needed for some specific use cases. It provides a simple way to
+generate and validate license. And encrytors and decrytors can be easily
+customized by the built-in plugins. Certainly, simple cmdline tool is also
+available.</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Link to this heading">#</a></h2>
 <p>Package-built has uploaded to pypi and just install with the command:</p>
@@ -214,8 +225,6 @@
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
-<section id="generate-and-validate-a-license">
-<h3>Generate and validate a license<a class="headerlink" href="#generate-and-validate-a-license" title="Link to this heading">#</a></h3>
 <p>To generate and validate a license, use the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyauthorizer<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>simple<span class="w"> </span>-C<span class="w"> </span><span class="nv">password</span><span class="o">=</span><span class="m">1234567890</span><span class="w">  </span>-O<span class="w"> </span>/tmp/license.json
 pyauthorizer<span class="w"> </span>validate<span class="w"> </span>-f<span class="w"> </span>simple<span class="w"> </span>-C<span class="w"> </span><span class="nv">password</span><span class="o">=</span><span class="m">1234567890</span><span class="w">  </span>-I<span class="w"> </span>/tmp/license.json
@@ -224,9 +233,17 @@ pyauthorizer<span class="w"> </span>validate<span class="w"> </span>-f<span clas
 <p>More command options can be listed by using <code class="docutils literal notranslate"><span class="pre">pyauthorizer</span> <span class="pre">--help</span></code>.</p>
 <!-- SPHINX-END -->
 </section>
-</section>
 <section id="content">
 <h2>Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advance.html">Advance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+</div>
 <!-- Disable to show when there is no api generation in the docs -->
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API docs</span></p>
@@ -250,12 +267,12 @@ pyauthorizer<span class="w"> </span>validate<span class="w"> </span>-f<span clas
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="api/pyauthorizer.html">
+          <a class="next-page" href="getting_started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">pyauthorizer package</div>
+                <div class="title">Getting Started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -292,11 +309,10 @@ pyauthorizer<span class="w"> </span>validate<span class="w"> </span>-f<span clas
             <ul>
 <li><a class="reference internal" href="#">pyauthorizer</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#generate-and-validate-a-license">Generate and validate a license</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#content">Content</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#content">Content</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
@@ -309,11 +325,12 @@ pyauthorizer<span class="w"> </span>validate<span class="w"> </span>-f<span clas
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=c05d24e6"></script>
+</div><script src="_static/documentation_options.js?v=0bd134b4"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
     </body>
 </html>
