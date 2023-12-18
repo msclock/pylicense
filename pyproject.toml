@@ -34,6 +34,7 @@ dependencies = [
     "click",
     "cryptography>=41.0.0",
     "entrypoints",
+    "types-entrypoints",
 ]
 
 [project.optional-dependencies]
@@ -93,10 +94,6 @@ disallow_incomplete_defs = false
 module = "pyauthorizer.*"
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
-
-[[tool.mypy.overrides]]
-module = ["cryptography.*", "click.*", "loguru", "entrypoints"]
-ignore_missing_imports = true
 
 [tool.ruff]
 src = ["src"]

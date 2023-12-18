@@ -3,7 +3,7 @@ from __future__ import annotations
 import abc
 from typing import Any
 
-import entrypoints as ep
+import entrypoints
 
 from pyauthorizer.exceptions import ErrorName, PyAuthorizerError
 
@@ -20,7 +20,7 @@ class PluginManager(abc.ABC):
         """
         Initialize the PluginManager.
         """
-        self._registry: dict[str, ep.EntryPoint] = {}
+        self._registry: dict[str, entrypoints.EntryPoint] = {}
         self.group_name = group_name
         self._has_registered = False
 
@@ -36,7 +36,7 @@ class PluginManager(abc.ABC):
         """
 
     @property
-    def registry(self) -> dict[str, ep.EntryPoint]:
+    def registry(self) -> dict[str, entrypoints.EntryPoint]:
         """Get the plugin registry"""
         return self._registry
 
@@ -56,13 +56,13 @@ class PluginManager(abc.ABC):
         Returns:
             None
         """
-        entry_point = ep.EntryPoint(flavor_name, plugin_module, None)
+        entry_point = entrypoints.EntryPoint(flavor_name, plugin_module, "")
         self._registry[flavor_name] = entry_point
         self._has_registered = True
 
     def register_entrypoints(self) -> None:
         """Register plugins using entrypoints"""
-        for entrypoint in ep.get_group_all(self.group_name):
+        for entrypoint in entrypoints.get_group_all(self.group_name):
             self._registry[entrypoint.name] = entrypoint
 
         self._has_registered = True
@@ -92,14 +92,11 @@ class EncryptorPlugins(PluginManager):
                 msg, error_code=ErrorName.resource_does_not_exist
             ) from err
 
-        if isinstance(plugin_like, ep.EntryPoint):
-            try:
-                plugin_obj = plugin_like.load()
-            except (AttributeError, ImportError) as exc:
-                plugin_load_err_msg = f'Failed to load the plugin "{item}": {exc}'
-                raise RuntimeError(plugin_load_err_msg) from exc
-            self.registry[item] = plugin_obj
-        else:
-            plugin_obj = plugin_like
+        try:
+            plugin_obj = plugin_like.load()
+        except (AttributeError, ImportError) as exc:
+            plugin_load_err_msg = f'Failed to load the plugin "{item}": {exc}'
+            raise RuntimeError(plugin_load_err_msg) from exc
+        self.registry[item] = plugin_obj
 
         return plugin_obj
