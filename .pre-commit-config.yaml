@@ -67,6 +67,11 @@ repos:
         args: []
         additional_dependencies:
           - pytest
+          - loguru
+          - click
+          - cryptography>=41.0.0
+          - entrypoints
+          - types-entrypoints
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.2.6"
