@@ -1,10 +1,10 @@
 # pyauthorizer
 
+<!-- SPHINX-START -->
+
 [![Actions Status][actions-badge]][actions-link]
 [![PyPI version][pypi-version]][pypi-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
-
-<!-- SPHINX-START -->
 
 <!-- prettier-ignore-start -->
 [actions-badge]:            https://github.com/msclock/pyauthorizer/workflows/main/badge.svg
