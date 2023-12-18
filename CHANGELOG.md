@@ -1,3 +1,15 @@
+## [0.2.4](https://github.com/msclock/pyauthorizer/compare/v0.2.3...v0.2.4) (2023-12-18)
+
+
+### Chores
+
+* **deps:** bump actions/setup-python from 4 to 5 ([bde4fd4](https://github.com/msclock/pyauthorizer/commit/bde4fd4b99acd54e0b049ba9a017b6d2ffc8a792))
+
+
+### Docs
+
+* display badges ([9a880de](https://github.com/msclock/pyauthorizer/commit/9a880decd0894588f34b9edf9c1c493419c835d2))
+
 ## [0.2.3](https://github.com/msclock/pyauthorizer/compare/v0.2.2...v0.2.3) (2023-12-18)
 
 
