@@ -1,3 +1,20 @@
+## [0.2.3](https://github.com/msclock/pyauthorizer/compare/v0.2.2...v0.2.3) (2023-12-18)
+
+
+### Performance
+
+* make it strong typed with mypy ([4353914](https://github.com/msclock/pyauthorizer/commit/43539141cb52e3eb1bbbf9d375b8e5dd54b41665))
+
+
+### Chores
+
+* exclude files from pre-commit ([a2db8ee](https://github.com/msclock/pyauthorizer/commit/a2db8eedf0052a7cc8eab2d8def6ef1f86b5479b))
+
+
+### Tests
+
+* add more tests ([8296b56](https://github.com/msclock/pyauthorizer/commit/8296b5675fec0f9fa6f4968e27e5dc94cac9b14d))
+
 ## [0.2.2](https://github.com/msclock/pyauthorizer/compare/v0.2.1...v0.2.2) (2023-12-17)
 
 
