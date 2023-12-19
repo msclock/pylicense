@@ -36,13 +36,13 @@ myst_enable_extensions = [
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "entrypoints": ("https://entrypoints.readthedocs.io/en/latest/", None),
+    "cryptography": ("https://cryptography.io/en/latest/", None),
 }
 
 nitpick_ignore = [
     ("py:class", "_io.StringIO"),
     ("py:class", "_io.BytesIO"),
-    ("py:class", "entrypoints.EntryPoint"),
-    ("py:class", "Fernet"),
 ]
 
 always_document_param_types = True
