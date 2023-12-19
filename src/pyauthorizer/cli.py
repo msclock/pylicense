@@ -6,7 +6,6 @@ from json.decoder import JSONDecodeError
 from pathlib import Path
 
 import click
-from click import option
 from loguru import logger
 
 from pyauthorizer.encryptor import interface
@@ -60,18 +59,16 @@ else:
     )
 
 
-# mypy: disallow-untyped-decorators=False
-
 # cmd options
-parse_output = option(
+parse_output = click.option(
     "--output-path",
     "-O",
     help="File to output results to as a JSON file. If not provided, prints output to stdout.",
 )
-parse_input = option(
+parse_input = click.option(
     "--input-path", "-I", required=True, help="Path to input json file for prediction"
 )
-parse_custom_arguments = option(
+parse_custom_arguments = click.option(
     "--config",
     "-C",
     metavar="NAME=VALUE",
@@ -81,7 +78,7 @@ parse_custom_arguments = option(
     "documentation/help for your encryptor target for a "
     "list of supported config options.",
 )
-encryptor_flavor = option(
+encryptor_flavor = click.option(
     "--flavor",
     "-f",
     required=True,
