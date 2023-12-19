@@ -1,3 +1,10 @@
+## [0.2.6](https://github.com/msclock/pyauthorizer/compare/v0.2.5...v0.2.6) (2023-12-19)
+
+
+### Performance
+
+* open static checker mypy for click ([42291dd](https://github.com/msclock/pyauthorizer/commit/42291ddedcf694b60198fcc39d05df14294ff13c))
+
 ## [0.2.5](https://github.com/msclock/pyauthorizer/compare/v0.2.4...v0.2.5) (2023-12-19)
 
 
