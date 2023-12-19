@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: hynek/build-and-inspect-python-package@v1
+      - uses: hynek/build-and-inspect-python-package@v2
 
   publish-pypi:
     needs: [dist]
@@ -46,7 +46,7 @@ jobs:
         with:
           name: Packages
           path: dist
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
 
       - name: Upload package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
