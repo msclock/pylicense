@@ -1,3 +1,22 @@
+## [0.2.5](https://github.com/msclock/pyauthorizer/compare/v0.2.4...v0.2.5) (2023-12-19)
+
+
+### Performance
+
+* add the intersphinx mapping typing ([121196a](https://github.com/msclock/pyauthorizer/commit/121196a365f9d74ba53cc858b1cc0e8f63e04e19))
+* add the sphinx ext viewcode ([a422759](https://github.com/msclock/pyauthorizer/commit/a422759fae669a9f2e6584aea3c0fd9a740267cd))
+
+
+### CI
+
+* optimize checkout and python ([11afb6c](https://github.com/msclock/pyauthorizer/commit/11afb6c9483c0fe69201baa8858e06d6040afe5c))
+* update actions revisions ([445c3dd](https://github.com/msclock/pyauthorizer/commit/445c3dd1896ea80cfdf20fdc0e0ffe3b3398af15))
+
+
+### Docs
+
+* refine intersphinx mapping ([82ecbcf](https://github.com/msclock/pyauthorizer/commit/82ecbcfdf6ece1368a03f30da98af8adaabdd60e))
+
 ## [0.2.4](https://github.com/msclock/pyauthorizer/compare/v0.2.3...v0.2.4) (2023-12-18)
 
 
