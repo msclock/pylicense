@@ -38,6 +38,7 @@ intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "entrypoints": ("https://entrypoints.readthedocs.io/en/latest/", None),
     "cryptography": ("https://cryptography.io/en/latest/", None),
+    "typing": ("https://typing.readthedocs.io/en/latest/", None),
 }
 
 nitpick_ignore = [

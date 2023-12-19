@@ -32,7 +32,7 @@ class PluginManager(abc.ABC):
             item (str): The name of the plugin to get.
 
         Returns:
-            Any: The plugin object.
+            typing.Any: The plugin object.
         """
 
     @property
