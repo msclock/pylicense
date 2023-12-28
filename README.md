@@ -16,11 +16,11 @@
 
 A simple authorizer for python project.
 
-Sometimes,even for a scripting language like python to generate and validate a
-token is needed for some specific use cases. It provides a simple way to
-generate and validate license. And encrytors and decrytors can be easily
-customized by the built-in plugins. Certainly, simple cmdline tool is also
-available.
+In some cases, even for a scripting language like Python, it may be necessary to
+generate and validate tokens for specific use cases. The `pyauthorizer` provides
+a simple way to generate and validate licenses. Additionally, the built-in
+plugins make it easy to customize encryptors and decryptors. There is also a
+simple command-line tool available.
 
 ## Install
 
