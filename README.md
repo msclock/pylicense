@@ -7,8 +7,8 @@
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
 <!-- prettier-ignore-start -->
-[actions-badge]:            https://github.com/msclock/pyauthorizer/workflows/main/badge.svg
-[actions-link]:             https://github.com/msclock/pyauthorizer/actions
+[actions-badge]:            https://github.com/msclock/pyauthorizer/actions/workflows/ci.yml/badge.svg
+[actions-link]:             https://github.com/msclock/pyauthorizer/actions/workflows/ci.yml
 [pypi-link]:                https://pypi.org/project/pyauthorizer/
 [pypi-platforms]:           https://img.shields.io/pypi/pyversions/pyauthorizer
 [pypi-version]:             https://img.shields.io/pypi/v/pyauthorizer
