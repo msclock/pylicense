@@ -1,3 +1,16 @@
+## [0.2.7](https://github.com/msclock/pyauthorizer/compare/v0.2.6...v0.2.7) (2023-12-28)
+
+
+### Performance
+
+* make pyauthorizer executable ([4b1be00](https://github.com/msclock/pyauthorizer/commit/4b1be0046d104d82374d101575736e57b6ed7eb0))
+
+
+### Docs
+
+* fix badge links ([aef2edc](https://github.com/msclock/pyauthorizer/commit/aef2edc9a235948abcc5a936cda55561177a62be))
+* improve readability ([b6417b0](https://github.com/msclock/pyauthorizer/commit/b6417b0d21978210815d2eed9033bd04725abc70))
+
 ## [0.2.6](https://github.com/msclock/pyauthorizer/compare/v0.2.5...v0.2.6) (2023-12-19)
 
 
