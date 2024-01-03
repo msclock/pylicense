@@ -15,6 +15,7 @@
 Overview <self>
 getting_started
 advance
+contributing
 changelog
 ```
 

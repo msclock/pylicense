@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Advance" href="advance.html" /><link rel="prev" title="pyauthorizer" href="index.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="Advance" href="advance.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Getting Started - pyauthorizer 0.1.dev1+g02a2373 documentation</title>
+        <title>Contributing - pyauthorizer 0.1.dev1+g02a2373 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -159,9 +159,9 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advance.html">Advance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API docs</span></p>
@@ -207,40 +207,91 @@
           </label>
         </div>
         <article role="main">
-          <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">pyauthorizer</span></code> package can be installed with the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyauthorizer
+          <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h1>
+<p>See the <a class="reference external" href="https://learn.scientific-python.org/development/">Scientific Python Developer Guide</a> for a detailed
+description of best practices for developing scientific packages.</p>
+<section id="quick-development">
+<h2>Quick development<a class="headerlink" href="#quick-development" title="Link to this heading">#</a></h2>
+<p>The fastest way to start with development is to use nox. If you don’t have nox,
+you can use <code class="docutils literal notranslate"><span class="pre">pipx</span> <span class="pre">run</span> <span class="pre">nox</span></code> to run it without installing, or <code class="docutils literal notranslate"><span class="pre">pipx</span> <span class="pre">install</span> <span class="pre">nox</span></code>.
+If you don’t have pipx (pip for applications), then you can install with
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pipx</span></code> (the only case were installing an application with regular
+pip is reasonable). If you use macOS, then pipx and nox are both in brew, use
+<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pipx</span> <span class="pre">nox</span></code>.</p>
+<p>To use, run <code class="docutils literal notranslate"><span class="pre">nox</span></code>. This will lint and test using every installed version of
+Python on your system, skipping ones that are not installed. You can also run
+specific jobs:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>nox<span class="w"> </span>-s<span class="w"> </span>lint<span class="w">  </span><span class="c1"># Lint only</span>
+<span class="gp">$ </span>nox<span class="w"> </span>-s<span class="w"> </span>tests<span class="w">  </span><span class="c1"># Python tests</span>
+<span class="gp">$ </span>nox<span class="w"> </span>-s<span class="w"> </span>docs<span class="w"> </span>--<span class="w"> </span>serve<span class="w">  </span><span class="c1"># Build and serve the docs</span>
+<span class="gp">$ </span>nox<span class="w"> </span>-s<span class="w"> </span>build<span class="w">  </span><span class="c1"># Make an SDist and wheel</span>
+</pre></div>
+</div>
+<p>Nox handles everything for you, including setting up an temporary virtual
+environment for each run.</p>
+</section>
+<section id="setting-up-a-development-environment-manually">
+<h2>Setting up a development environment manually<a class="headerlink" href="#setting-up-a-development-environment-manually" title="Link to this heading">#</a></h2>
+<p>You can set up a development environment by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>./.venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
+</div>
+<p>If you have the
+<a class="reference external" href="https://github.com/brettcannon/python-launcher">Python Launcher for Unix</a>, you
+can instead do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+py<span class="w"> </span>-m<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span>
 </pre></div>
 </div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
-<p>Available commands are:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:<span class="w"> </span>pyauthorizer<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
-
-<span class="w">  </span>Using<span class="w"> </span>encrpytor<span class="w"> </span>to<span class="w"> </span>manage<span class="w"> </span>tokens.Run<span class="w"> </span><span class="sb">`</span>pyauthorizer<span class="w"> </span>--help<span class="sb">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>details
-<span class="w">  </span>on<span class="w"> </span>the<span class="w"> </span>supported<span class="w"> </span>URI<span class="w"> </span>format<span class="w"> </span>and<span class="w"> </span>config<span class="w"> </span>options<span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span>given<span class="w"> </span>target.<span class="w"> </span>Support
-<span class="w">  </span>is<span class="w"> </span>currently<span class="w"> </span>installed<span class="w"> </span><span class="k">for</span><span class="w"> </span>encryptor<span class="w"> </span>to:<span class="w"> </span>multiple,<span class="w"> </span>simple
-
-<span class="w">  </span>See<span class="w"> </span>all<span class="w"> </span>supported<span class="w"> </span>encryption<span class="w"> </span>targets<span class="w"> </span>and<span class="w"> </span>installation<span class="w"> </span>instructions<span class="w"> </span><span class="k">in</span><span class="w"> </span>https:
-<span class="w">  </span>//github.com/msclock/pyauthorizer/tree/master/pyauthorizer/encrpytor/builtin
-
-<span class="w">  </span>You<span class="w"> </span>can<span class="w"> </span>also<span class="w"> </span>write<span class="w"> </span>your<span class="w"> </span>own<span class="w"> </span>plugin<span class="w"> </span><span class="k">for</span><span class="w"> </span>encryptor<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>custom<span class="w"> </span>target.<span class="w"> </span>For
-<span class="w">  </span>instructions<span class="w"> </span>on<span class="w"> </span>writing<span class="w"> </span>and<span class="w"> </span>distributing<span class="w"> </span>a<span class="w"> </span>plugin,<span class="w"> </span>related<span class="w"> </span>docs<span class="w"> </span>are<span class="w"> </span>coming
-<span class="w">  </span>soon.
-
-Options:
-<span class="w">  </span>--help<span class="w">  </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
-
-Commands:
-<span class="w">  </span>create<span class="w">    </span>Generate<span class="w"> </span>a<span class="w"> </span>token<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>flavor<span class="w"> </span>and<span class="w"> </span>configuration,...
-<span class="w">  </span>validate<span class="w">  </span>Validates<span class="w"> </span>a<span class="w"> </span>token<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>specified<span class="w"> </span>flavor.
+<section id="post-setup">
+<h2>Post setup<a class="headerlink" href="#post-setup" title="Link to this heading">#</a></h2>
+<p>You should prepare pre-commit, which will help you by checking that commits pass
+required checks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit<span class="w"> </span><span class="c1"># or brew install pre-commit on macOS</span>
+pre-commit<span class="w"> </span>install<span class="w"> </span><span class="c1"># Will install a pre-commit hook into the git repo</span>
 </pre></div>
 </div>
-<p>For more information, run <code class="docutils literal notranslate"><span class="pre">pyauthorizer</span> <span class="pre">--help</span></code></p>
+<p>You can also/alternatively run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span></code> (changes only) or
+<code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> to check even without installing the hook.</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<p>Use pytest to run the unit checks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</section>
+<section id="coverage">
+<h2>Coverage<a class="headerlink" href="#coverage" title="Link to this heading">#</a></h2>
+<p>Use pytest-cov to generate coverage reports:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>pyauthorizer
+</pre></div>
+</div>
+</section>
+<section id="building-docs">
+<h2>Building docs<a class="headerlink" href="#building-docs" title="Link to this heading">#</a></h2>
+<p>You can build the docs using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nox<span class="w"> </span>-s<span class="w"> </span>docs
+</pre></div>
+</div>
+<p>You can see a preview with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nox<span class="w"> </span>-s<span class="w"> </span>docs<span class="w"> </span>--<span class="w"> </span>serve
+</pre></div>
+</div>
+</section>
+<section id="pre-commit">
+<h2>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading">#</a></h2>
+<p>This project uses pre-commit for all style checking. While you can run it with
+nox, this is such an important tool that it deserves to be installed on its own.
+Install pre-commit and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>-a
+</pre></div>
+</div>
+<p>to check all files.</p>
 </section>
 </section>
 
@@ -249,23 +300,23 @@ Commands:
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="advance.html">
+          <a class="next-page" href="changelog.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Advance</div>
+                <div class="title">Changelog</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="advance.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Advance</div>
                 
               </div>
             </a>
@@ -299,9 +350,14 @@ Commands:
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Getting Started</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#">Contributing</a><ul>
+<li><a class="reference internal" href="#quick-development">Quick development</a></li>
+<li><a class="reference internal" href="#setting-up-a-development-environment-manually">Setting up a development environment manually</a></li>
+<li><a class="reference internal" href="#post-setup">Post setup</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#coverage">Coverage</a></li>
+<li><a class="reference internal" href="#building-docs">Building docs</a></li>
+<li><a class="reference internal" href="#pre-commit">Pre-commit</a></li>
 </ul>
 </li>
 </ul>
