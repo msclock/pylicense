@@ -17,6 +17,7 @@ Python on your system, skipping ones that are not installed. You can also run
 specific jobs:
 
 ```console
+$ nox -l   # List available tasks
 $ nox -s lint  # Lint only
 $ nox -s tests  # Python tests
 $ nox -s docs -- serve  # Build and serve the docs
@@ -63,7 +64,14 @@ You can also/alternatively run `pre-commit run` (changes only) or
 Use pytest to run the unit checks:
 
 ```bash
+pip install -e .[test]
 pytest
+```
+
+or
+
+```bash
+nox -s tests
 ```
 
 ## Coverage
@@ -71,7 +79,14 @@ pytest
 Use pytest-cov to generate coverage reports:
 
 ```bash
-pytest --cov=pyauthorizer
+pip install -e .[test]
+pytest --cov
+```
+
+or
+
+```bash
+nox -s tests -- --cov
 ```
 
 ## Building docs
