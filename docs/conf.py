@@ -3,7 +3,7 @@ from __future__ import annotations
 import importlib.metadata
 
 project = "pyauthorizer"
-copyright = "2023, msclock"
+copyright = "2023-2024, msclock"
 author = "msclock"
 version = release = importlib.metadata.version("pyauthorizer")
 
