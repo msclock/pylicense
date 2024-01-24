@@ -11,7 +11,7 @@
 [actions-link]:             https://github.com/msclock/pyauthorizer/actions/workflows/ci.yml
 [pypi-link]:                https://pypi.org/project/pyauthorizer/
 [pypi-platforms]:           https://img.shields.io/pypi/pyversions/pyauthorizer
-[pypi-version]:             https://img.shields.io/pypi/v/pyauthorizer
+[pypi-version]:             https://badge.fury.io/py/pyauthorizer.svg
 <!-- prettier-ignore-end -->
 
 A simple authorizer for python project.
