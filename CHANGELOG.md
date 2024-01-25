@@ -1,3 +1,22 @@
+## [0.2.8](https://github.com/msclock/pyauthorizer/compare/v0.2.7...v0.2.8) (2024-01-25)
+
+
+### Performance
+
+* specify encryptor plugins group explicitly ([006ea6d](https://github.com/msclock/pyauthorizer/commit/006ea6d909ce7353ca44cf937e56c56d08eabb18))
+
+
+### Chores
+
+* change pypi version badge ([383ad1a](https://github.com/msclock/pyauthorizer/commit/383ad1a725a12872e4c3825f6439bffc5c1bbea4))
+* change the license date ([#17](https://github.com/msclock/pyauthorizer/issues/17)) ([1fb45e3](https://github.com/msclock/pyauthorizer/commit/1fb45e35af435cbeaebf78720a4373fc056f2fc0))
+
+
+### Docs
+
+* add contributing pages ([02a2373](https://github.com/msclock/pyauthorizer/commit/02a23735e940f36ac408053b07da52e7f4fd5a59))
+* refine CONTRIBUTING.md ([#16](https://github.com/msclock/pyauthorizer/issues/16)) ([db60e86](https://github.com/msclock/pyauthorizer/commit/db60e869958514b9eb03078373a139f99261cc7b))
+
 ## [0.2.7](https://github.com/msclock/pyauthorizer/compare/v0.2.6...v0.2.7) (2023-12-28)
 
 
