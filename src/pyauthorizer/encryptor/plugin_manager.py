@@ -73,7 +73,7 @@ class EncryptorPlugins(PluginManager):
 
     def __init__(self) -> None:
         """Initialize the EncryptorPlugins"""
-        super().__init__("pyauthorizer.encryptor")
+        super().__init__(group_name=__package__)
         self.register_entrypoints()
 
     def __getitem__(self, item: str) -> Any:
