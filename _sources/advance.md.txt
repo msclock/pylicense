@@ -55,7 +55,7 @@ distribute it via PyPI.
 
 Congrats, you’ve now written and distributed your own pyauthorizer plugin!
 
-## Work as ports in nuitka
+## Work with nuitka
 
 For secure reasons, sources sometimes need to be converted to executables or
 shared modules that prevents them from being tampered with or leaked. This can
