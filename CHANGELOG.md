@@ -1,3 +1,17 @@
+## [0.2.9](https://github.com/msclock/pyauthorizer/compare/v0.2.8...v0.2.9) (2024-01-30)
+
+
+### Chores
+
+* change pypi badge with shields ([ea9180e](https://github.com/msclock/pyauthorizer/commit/ea9180e4670ec3538364ad29cc2a1b9dae6d287a))
+* **deps:** bump codecov/codecov-action from 3.1.4 to 3.1.5 ([#18](https://github.com/msclock/pyauthorizer/issues/18)) ([7168e7e](https://github.com/msclock/pyauthorizer/commit/7168e7e016d5e663fbf90e44894672c5c5da3e40))
+
+
+### Docs
+
+* fix typo ([626d918](https://github.com/msclock/pyauthorizer/commit/626d9183525a07cde7a172338f198ed6d727b073))
+* more comments ([5c93831](https://github.com/msclock/pyauthorizer/commit/5c938314df7b16cf48da2ab96a295f84fe0d311e))
+
 ## [0.2.8](https://github.com/msclock/pyauthorizer/compare/v0.2.7...v0.2.8) (2024-01-25)
 
 
