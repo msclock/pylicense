@@ -65,7 +65,7 @@ jobs:
           --durations=20
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v4.1.0
 
   docs:
     name: Docs on ${{ matrix.runs-on }}
