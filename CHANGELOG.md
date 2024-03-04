@@ -1,3 +1,25 @@
+## [0.2.10](https://github.com/msclock/pyauthorizer/compare/v0.2.9...v0.2.10) (2024-03-04)
+
+
+### Chores
+
+* **deps:** bump codecov/codecov-action from 3.1.4 to 4.0.1 ([#24](https://github.com/msclock/pyauthorizer/issues/24)) ([170dc4a](https://github.com/msclock/pyauthorizer/commit/170dc4aedcf4cf7369a85d6be5471caf2a0fc6e2))
+* **deps:** bump codecov/codecov-action from 4.0.1 to 4.1.0 ([#28](https://github.com/msclock/pyauthorizer/issues/28)) ([c90da33](https://github.com/msclock/pyauthorizer/commit/c90da33aeea30f2522c96aff79014667aecb87d3))
+* **deps:** bump pre-commit/action from 3.0.0 to 3.0.1 ([#25](https://github.com/msclock/pyauthorizer/issues/25)) ([aacd801](https://github.com/msclock/pyauthorizer/commit/aacd8012a45837d7d56200faf75432e4a4157566))
+* **deps:** bump wntrblm/nox from 2023.04.22 to 2024.03.02 ([#27](https://github.com/msclock/pyauthorizer/issues/27)) ([d23cdea](https://github.com/msclock/pyauthorizer/commit/d23cdea5c5cd6ee9a1a5997aff014c2cd76f591d))
+
+
+### CI
+
+* opt closing preview pages ([#20](https://github.com/msclock/pyauthorizer/issues/20)) ([dd82c1e](https://github.com/msclock/pyauthorizer/commit/dd82c1ec1d55f0bed3cb9d3555895f9d7c4666f9))
+* set preview pages permissions ([#22](https://github.com/msclock/pyauthorizer/issues/22)) ([e4a0981](https://github.com/msclock/pyauthorizer/commit/e4a098179dc9086bccd1d2e9419a1f49e0f6bdaf))
+* set proper permission for preview ([#29](https://github.com/msclock/pyauthorizer/issues/29)) ([8f84ee0](https://github.com/msclock/pyauthorizer/commit/8f84ee08c2f3a4bf941ee6169cc6fe90e9929c59))
+
+
+### Tests
+
+* opt test ([#23](https://github.com/msclock/pyauthorizer/issues/23)) ([7c5ec1c](https://github.com/msclock/pyauthorizer/commit/7c5ec1c2e0265390706a7ae9bb15ad9699254582))
+
 ## [0.2.9](https://github.com/msclock/pyauthorizer/compare/v0.2.8...v0.2.9) (2024-01-30)
 
 
