@@ -12,11 +12,15 @@ concurrency:
   group: preview-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   pages-preview:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
