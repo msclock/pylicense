@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="pyauthorizer package" href="api/pyauthorizer.html" /><link rel="prev" title="Advance" href="advance.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
-        <title>Contributing - pyauthorizer 0.2.12 documentation</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
+        <title>Contributing - pyauthorizer 0.1.dev1+gad14fa7 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">pyauthorizer 0.2.12 documentation</div></a>
+      <a href="index.html"><div class="brand">pyauthorizer 0.1.dev1+gad14fa7 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">pyauthorizer 0.2.12 documentation</span>
+  <span class="sidebar-brand-text">pyauthorizer 0.1.dev1+gad14fa7 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -208,11 +208,11 @@
         </div>
         <article role="main">
           <section id="contributing">
-<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h1>
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h1>
 <p>See the <a class="reference external" href="https://learn.scientific-python.org/development/">Scientific Python Developer Guide</a> for a detailed
 description of best practices for developing scientific packages.</p>
 <section id="quick-development">
-<h2>Quick development<a class="headerlink" href="#quick-development" title="Link to this heading">#</a></h2>
+<h2>Quick development<a class="headerlink" href="#quick-development" title="Link to this heading">¶</a></h2>
 <p>The fastest way to start with development is to use nox. If you don’t have nox,
 you can use <code class="docutils literal notranslate"><span class="pre">pipx</span> <span class="pre">run</span> <span class="pre">nox</span></code> to run it without installing, or <code class="docutils literal notranslate"><span class="pre">pipx</span> <span class="pre">install</span> <span class="pre">nox</span></code>.
 If you don’t have pipx (pip for applications), then you can install with
@@ -233,7 +233,7 @@ specific jobs:</p>
 environment for each run.</p>
 </section>
 <section id="setting-up-a-development-environment-manually">
-<h2>Setting up a development environment manually<a class="headerlink" href="#setting-up-a-development-environment-manually" title="Link to this heading">#</a></h2>
+<h2>Setting up a development environment manually<a class="headerlink" href="#setting-up-a-development-environment-manually" title="Link to this heading">¶</a></h2>
 <p>You can set up a development environment by running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="nb">source</span><span class="w"> </span>./.venv/bin/activate
@@ -249,7 +249,7 @@ py<span class="w"> </span>-m<span class="w"> </span>install<span class="w"> </sp
 </div>
 </section>
 <section id="post-setup">
-<h2>Post setup<a class="headerlink" href="#post-setup" title="Link to this heading">#</a></h2>
+<h2>Post setup<a class="headerlink" href="#post-setup" title="Link to this heading">¶</a></h2>
 <p>You should prepare pre-commit, which will help you by checking that commits pass
 required checks:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit<span class="w"> </span><span class="c1"># or brew install pre-commit on macOS</span>
@@ -260,7 +260,7 @@ pre-commit<span class="w"> </span>install<span class="w"> </span><span class="c1
 <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code> to check even without installing the hook.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
 <p>Use pytest to run the unit checks:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>test<span class="o">]</span>
 pytest
@@ -272,7 +272,7 @@ pytest
 </div>
 </section>
 <section id="coverage">
-<h2>Coverage<a class="headerlink" href="#coverage" title="Link to this heading">#</a></h2>
+<h2>Coverage<a class="headerlink" href="#coverage" title="Link to this heading">¶</a></h2>
 <p>Use pytest-cov to generate coverage reports:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>test<span class="o">]</span>
 pytest<span class="w"> </span>--cov
@@ -284,7 +284,7 @@ pytest<span class="w"> </span>--cov
 </div>
 </section>
 <section id="building-docs">
-<h2>Building docs<a class="headerlink" href="#building-docs" title="Link to this heading">#</a></h2>
+<h2>Building docs<a class="headerlink" href="#building-docs" title="Link to this heading">¶</a></h2>
 <p>You can build the docs using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nox<span class="w"> </span>-s<span class="w"> </span>docs
 </pre></div>
@@ -295,7 +295,7 @@ pytest<span class="w"> </span>--cov
 </div>
 </section>
 <section id="pre-commit">
-<h2>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading">#</a></h2>
+<h2>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading">¶</a></h2>
 <p>This project uses pre-commit for all style checking. While you can run it with
 nox, this is such an important tool that it deserves to be installed on its own.
 Install pre-commit and run:</p>
@@ -380,8 +380,8 @@ Install pre-commit and run:</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=1e30946d"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+</div><script src="_static/documentation_options.js?v=b4e3f635"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
