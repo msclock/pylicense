@@ -129,29 +129,10 @@ jobs:
           node-version: 20
 
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v4
-        id: semantic
-        with:
-          semantic_version: 22.0.5
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'master',
-              'main',
-              'next',
-              'next-major',
-              {
-                name: 'beta',
-                prerelease: true
-              },
-              {
-                name: 'alpha',
-                prerelease: true
-              }
-            ]
-          extra_plugins: |
-            @semantic-release/exec
-            @semantic-release/github
-            conventional-changelog-conventionalcommits
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: >
+          npx
+          --package conventional-changelog-conventionalcommits@7.0.2
+          --package semantic-release@23.1.1
+          semantic-release
