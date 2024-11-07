@@ -110,29 +110,27 @@ jobs:
         with:
           jobs: ${{ toJSON(needs) }}
 
-  release:
-    name: release
+  semantic-release:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     permissions:
-      contents: write
+      contents: write # write for semantic-release
     needs: [pass]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
 
       - name: Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           npx
-          --package conventional-changelog-conventionalcommits@7.0.2
-          --package semantic-release@23.1.1
+          --package conventional-changelog-conventionalcommits@7
+          --package semantic-release@23
           semantic-release
